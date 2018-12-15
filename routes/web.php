@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Route::get('users', function()
 {
-    // return View::make('users');
-    return view('users');
+	// both ways work
+    return View::make('users');
+    // return view('users');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
