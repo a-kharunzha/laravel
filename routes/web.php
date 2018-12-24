@@ -54,4 +54,7 @@ Route::get('users', function()
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+// 
+Route::get('/socket', 'SocketController@index');
+Route::post('/socket/increment', 'SocketController@increment');
 
