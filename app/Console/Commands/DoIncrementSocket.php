@@ -37,8 +37,8 @@ class DoIncrementSocket extends Command
      */
     public function handle()
     {
-		$newCounter = session('counter') + 1;
-		session('counter',$newCounter);
-		event(new \App\Events\SocketIncremented());
+        //$newCounter = session('counter') + 1;
+		//session('counter',$newCounter);
+		event(new \App\Events\SocketIncremented(['test'=>1]));
     }
 }

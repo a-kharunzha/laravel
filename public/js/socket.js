@@ -15,5 +15,11 @@
 			}
 		},'json');
 	});
+	console.log('111');
+	Echo.channel('socket')
+	    // .listen('App\\Events\\SocketIncremented', (e) => {
+	    .listen('SocketIncremented', (e) => {
+	        console.log(e);
+	    });
 
 }(jQuery));
