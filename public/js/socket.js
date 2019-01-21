@@ -11,7 +11,7 @@
 	jBody.on('click','.js-add-count',function(){
 		$.post('/socket/increment',function(response){
 			if(response.success){
-				// jBody.trigger('socket.incremented');		
+				jBody.trigger('doUpdateCounter',[response.newValue]);	
 			}
 		},'json');
 	});
@@ -19,7 +19,12 @@
 	Echo.channel('socket')
 	    // .listen('App\\Events\\SocketIncremented', (e) => {
 	    .listen('SocketIncremented', (e) => {
-	        console.log(e);
-	    });
+			console.log(e);
+			jBody.trigger('doUpdateCounter',[e.data.newValue]);
+		});
+	
+	jBody.on('doUpdateCounter',function(e,newValue){
+		$('.js-counter').text(newValue);
+	});
 
 }(jQuery));

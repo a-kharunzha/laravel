@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\SocketCounter;
 
 class DoIncrementSocket extends Command
 {
@@ -37,8 +38,7 @@ class DoIncrementSocket extends Command
      */
     public function handle()
     {
-        //$newCounter = session('counter') + 1;
-		//session('counter',$newCounter);
-		event(new \App\Events\SocketIncremented(['test'=>1]));
+		$counter = SocketCounter::getInstance();
+		$newValue = $counter->increment();
     }
 }

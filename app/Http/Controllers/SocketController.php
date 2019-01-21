@@ -3,28 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\SocketCounter;
 
 class SocketController extends Controller
 {
-    /**
+	/**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
+		$counter = SocketCounter::getInstance();
 		return view('socket')
-			->with('counter', $request->session()->get('counter', 0))
+			->with('counter', $counter->value())
 		;
 	}
 	
+	/**
+     * backend method for incrementing counter value
+     *
+     * @return \Illuminate\Http\Response
+     */
 	public function increment(Request $request)
     {
-		$counter = $request->session()->get('counter', 0);
-		$counter++;
-		$request->session()->put('counter', $counter);
+		$counter = SocketCounter::getInstance();
+		$newValue = $counter->increment();
 		return response()->json([
-			'success' => true
+			'success' => true,
+			'newValue' => $newValue
 		]);
     }
 }
